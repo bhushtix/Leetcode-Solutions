@@ -1,3 +1,5 @@
+FIRST APPROACH:
+
 class Solution {
     int maxDepth=0;
     int sum=0;
@@ -22,5 +24,31 @@ class Solution {
 
         helper(root.right, depth+1);
         helper(root.left, depth+1);
+    }
+}
+
+SECOND APPROACH: BFS
+
+class Solution {
+    public int deepestLeavesSum(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList();
+        q.offer(root);
+
+        int sum = 0;
+
+        while(!q.isEmpty()) {
+            sum=0;
+            int size = q.size();
+
+            for(int i=0; i<size; i++) {
+                TreeNode current = q.poll();
+                sum+=current.val;
+                if(current.left!=null) q.offer(current.left);
+                if(current.right!=null) q.offer(current.right);
+
+            }
+        }
+
+        return sum;
     }
 }
